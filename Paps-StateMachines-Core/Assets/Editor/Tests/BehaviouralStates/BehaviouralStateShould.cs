@@ -129,5 +129,24 @@ namespace Tests
             stateBehaviour2.Received(1).OnExit();
             stateBehaviour3.DidNotReceive().OnExit();
         }
+
+        [Test]
+        public void Cut_Behaviour_Update_Calls_When_Exit_Method_Is_Called_From_Within_An_OnUpdate_Method()
+        {
+            var stateBehaviour1 = Substitute.For<IStateBehaviour>();
+            var stateBehaviour2 = Substitute.For<IStateBehaviour>();
+            var stateBehaviour3 = Substitute.For<IStateBehaviour>();
+
+            var state = new BehaviouralState(stateBehaviour1, stateBehaviour2, stateBehaviour3);
+
+            stateBehaviour2.When(behaviour => behaviour.OnUpdate())
+                .Do(callbackInfo => state.Exit());
+
+            state.Update();
+
+            stateBehaviour1.Received(1).OnUpdate();
+            stateBehaviour2.Received(1).OnUpdate();
+            stateBehaviour3.DidNotReceive().OnUpdate();
+        }
     }
 }

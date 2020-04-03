@@ -16,6 +16,8 @@ namespace Paps.StateMachines.Extensions.BehaviouralStates
 
         public int BehaviourCount => _behaviours.Count;
 
+        private bool _hasExited;
+
         public BehaviouralState()
         {
             _behaviours = new List<IStateBehaviour>();
@@ -96,18 +98,24 @@ namespace Paps.StateMachines.Extensions.BehaviouralStates
 
         public void Enter()
         {
+            _hasExited = false;
+
             for(_currentBehaviourEnterIndex = 0; _currentBehaviourEnterIndex < _behaviours.Count; _currentBehaviourEnterIndex++)
                 _behaviours[_currentBehaviourEnterIndex].OnEnter();
         }
 
         public void Update()
         {
-            for (_currentBehaviourUpdateIndex = 0; _currentBehaviourUpdateIndex < _behaviours.Count; _currentBehaviourUpdateIndex++)
+            _hasExited = false;
+
+            for (_currentBehaviourUpdateIndex = 0; _currentBehaviourUpdateIndex < _behaviours.Count && _hasExited == false; _currentBehaviourUpdateIndex++)
                 _behaviours[_currentBehaviourUpdateIndex].OnUpdate();
         }
 
         public void Exit()
         {
+            _hasExited = true;
+
             for (_currentBehaviourExitIndex = 0; _currentBehaviourExitIndex < _behaviours.Count; _currentBehaviourExitIndex++)
                 _behaviours[_currentBehaviourExitIndex].OnExit();
         }
