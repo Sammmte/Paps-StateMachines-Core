@@ -1,0 +1,18 @@
+{
+  "name": "paps.state-machines-core",
+  "version": "0.0.1-unity",
+  "displayName": "Paps StateMachines Core",
+  "unity": "2019.2",
+  "description": "Core classes for Paps StateMachine Packages",
+  "keywords": [
+    "c#",
+    "fsm",
+    "paps",
+    "unity",
+    "state machine"
+  ],
+  "author": {
+    "name": "Santiago Perez"
+  },
+  "homepage": "https://github.com/Sammmte/Paps-StateMachines-Core"
+}
