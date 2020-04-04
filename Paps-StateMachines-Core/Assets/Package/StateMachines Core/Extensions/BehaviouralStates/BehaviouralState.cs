@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System;
+﻿using System;
 using System.Collections;
-using System.Security.Cryptography;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Paps.StateMachines.Extensions.BehaviouralStates
 {
@@ -15,8 +14,6 @@ namespace Paps.StateMachines.Extensions.BehaviouralStates
         private List<IStateBehaviour> _behaviours;
 
         public int BehaviourCount => _behaviours.Count;
-
-        private bool _hasExited;
 
         public BehaviouralState()
         {
@@ -98,24 +95,18 @@ namespace Paps.StateMachines.Extensions.BehaviouralStates
 
         public void Enter()
         {
-            _hasExited = false;
-
             for(_currentBehaviourEnterIndex = 0; _currentBehaviourEnterIndex < _behaviours.Count; _currentBehaviourEnterIndex++)
                 _behaviours[_currentBehaviourEnterIndex].OnEnter();
         }
 
         public void Update()
         {
-            _hasExited = false;
-
-            for (_currentBehaviourUpdateIndex = 0; _currentBehaviourUpdateIndex < _behaviours.Count && _hasExited == false; _currentBehaviourUpdateIndex++)
+            for (_currentBehaviourUpdateIndex = 0; _currentBehaviourUpdateIndex < _behaviours.Count; _currentBehaviourUpdateIndex++)
                 _behaviours[_currentBehaviourUpdateIndex].OnUpdate();
         }
 
         public void Exit()
         {
-            _hasExited = true;
-
             for (_currentBehaviourExitIndex = 0; _currentBehaviourExitIndex < _behaviours.Count; _currentBehaviourExitIndex++)
                 _behaviours[_currentBehaviourExitIndex].OnExit();
         }
