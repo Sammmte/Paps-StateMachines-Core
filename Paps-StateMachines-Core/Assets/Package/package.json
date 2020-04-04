@@ -1,6 +1,6 @@
 {
   "name": "paps.state-machines-core",
-  "version": "0.0.3-unity",
+  "version": "0.0.2-unity",
   "displayName": "Paps StateMachines Core",
   "unity": "2019.2",
   "description": "Core classes for Paps StateMachine Packages",
