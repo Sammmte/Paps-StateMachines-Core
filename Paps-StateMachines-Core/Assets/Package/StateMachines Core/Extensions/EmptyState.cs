@@ -12,11 +12,6 @@
             
         }
 
-        public bool HandleEvent(IEvent messageEvent)
-        {
-            return false;
-        }
-
         public void Update()
         {
             

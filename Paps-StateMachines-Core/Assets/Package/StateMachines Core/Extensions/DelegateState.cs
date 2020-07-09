@@ -2,7 +2,7 @@
 
 namespace Paps.StateMachines.Extensions
 {
-    public class DelegateState<TState, TTrigger> : IState
+    public class DelegateState : IState
     {
         protected Action onEnter;
         protected Action onUpdate;
@@ -17,26 +17,17 @@ namespace Paps.StateMachines.Extensions
 
         public void Enter()
         {
-            if(onEnter != null)
-            {
-                onEnter();
-            }
+            onEnter?.Invoke();
         }
 
         public void Update()
         {
-            if(onUpdate != null)
-            {
-                onUpdate();
-            }
+            onUpdate?.Invoke();
         }
 
         public void Exit()
         {
-            if(onExit != null)
-            {
-                onExit();
-            }
+            onExit?.Invoke();
         }
     }
 }

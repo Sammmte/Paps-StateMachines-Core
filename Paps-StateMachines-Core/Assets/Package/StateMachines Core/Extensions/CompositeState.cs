@@ -6,7 +6,7 @@ namespace Paps.StateMachines.Extensions
     {
         private IState[] _states;
 
-        public CompositeState(IState[] innerStates)
+        public CompositeState(params IState[] innerStates)
         {
             _states = innerStates ?? throw new ArgumentNullException(nameof(innerStates));
         }

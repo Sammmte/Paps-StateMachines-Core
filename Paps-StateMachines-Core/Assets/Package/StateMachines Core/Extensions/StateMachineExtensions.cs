@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Castle.Core.Internal;
+using System;
 using System.Collections.Generic;
+using UnityEditorInternal;
+using UnityEngine;
 
 namespace Paps.StateMachines.Extensions
 {
@@ -74,32 +77,32 @@ namespace Paps.StateMachines.Extensions
         }
 
         public static void AddTimerState<TState, TTrigger>(this IStateMachine<TState, TTrigger> fsm, TState stateId,
-            double milliseconds, Action<TState> onTimerElapsed)
+            TimeSpan time, Action onTimerElapsed)
         {
-            fsm.AddState(stateId, new TimerState<TState, TTrigger>(fsm, stateId, milliseconds, onTimerElapsed));
+            fsm.AddState(stateId, States.Timer(time, onTimerElapsed));
         }
 
         public static void AddEmpty<TState, TTrigger>(this IStateMachine<TState, TTrigger> fsm, TState stateId)
         {
-            fsm.AddState(stateId, new EmptyState());
+            fsm.AddState(stateId, States.Empty());
         }
 
         public static void AddWithEvents<TState, TTrigger>(this IStateMachine<TState, TTrigger> fsm, TState stateId,
             Action onEnter, Action onUpdate, Action onExit)
         {
-            fsm.AddState(stateId, new DelegateState<TState, TTrigger>(onEnter, onUpdate, onExit));
+            fsm.AddState(stateId, States.WithEvents(onEnter, onUpdate, onExit));
         }
 
         public static void AddWithEvents<TState, TTrigger>(this IStateMachine<TState, TTrigger> fsm, TState stateId,
             Action onEnter)
         {
-            fsm.AddState(stateId, new DelegateState<TState, TTrigger>(onEnter, null, null));
+            fsm.AddState(stateId, States.WithEvents(onEnter, null, null));
         }
 
         public static void AddWithEvents<TState, TTrigger>(this IStateMachine<TState, TTrigger> fsm, TState stateId,
             Action onEnter, Action onExit)
         {
-            fsm.AddState(stateId, new DelegateState<TState, TTrigger>(onEnter, null, onExit));
+            fsm.AddState(stateId, States.WithEvents(onEnter, null, onExit));
         }
 
         public static void AddWithEnterEvent<TState, TTrigger>(this IStateMachine<TState, TTrigger> fsm, TState stateId, Action onEnter)
@@ -410,19 +413,12 @@ namespace Paps.StateMachines.Extensions
 
         public static void AddEmptyStates<TState, TTrigger>(this IStateMachine<TState, TTrigger> fsm, params TState[] states)
         {
-            (TState, IState)[] emptyStates = new(TState, IState)[states.Length];
-
-            for(int i = 0; i < emptyStates.Length; i++)
-            {
-                emptyStates[i] = (states[i], new EmptyState());
-            }
-
-            fsm.AddStates(emptyStates);
+            fsm.AddStates(states.ConvertAll(stateId => (stateId, States.Empty() as IState)));
         }
 
         public static void AddComposite<TState, TTrigger>(this IStateMachine<TState, TTrigger> fsm, TState stateId, params IState[] states)
         {
-            fsm.AddState(stateId, new CompositeState(states));
+            fsm.AddState(stateId, States.Composite(states));
         }
     }
 }
