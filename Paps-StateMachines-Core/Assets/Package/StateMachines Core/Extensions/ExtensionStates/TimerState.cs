@@ -10,12 +10,11 @@ namespace Paps.StateMachines.Extensions
 
         public TimerState(TimeSpan time, Action onTimerElapsed)
         {
-
             _onTimerElapsed = onTimerElapsed;
 
             _timer = new Timer();
             _timer.AutoReset = false;
-            _timer.Interval = time.Milliseconds;
+            _timer.Interval = time.TotalMilliseconds;
         }
 
         public void Enter()
