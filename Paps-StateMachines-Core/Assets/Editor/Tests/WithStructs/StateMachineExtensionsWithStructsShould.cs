@@ -19,7 +19,7 @@ namespace Tests.WithStructs
 
         protected override IStateMachine<T, U> NewStateMachine<T, U>()
         {
-            return new PlainStateMachine<T, U>();
+            return null;
         }
 
         protected override Transition<int, int> NewTransition()

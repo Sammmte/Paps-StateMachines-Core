@@ -1,11 +1,15 @@
-﻿namespace Paps.StateMachines
+﻿using Paps.Maybe;
+
+namespace Paps.StateMachines
 {
     public interface IStateMachine<TState, TTrigger>
     {
         int StateCount { get; }
         int TransitionCount { get; }
 
-        TState InitialState { get; set; }
+        Maybe<TState> InitialState { get; }
+
+        void SetInitialState(TState stateId);
 
         void AddState(TState stateId, IState state);
         bool RemoveState(TState stateId);
