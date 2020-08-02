@@ -1,15 +1,22 @@
 {
-	"scopedRegistries": [
+  "scopedRegistries": [
     {
       "name": "Main",
       "url": "https://registry.npmjs.org/",
       "scopes": [
         "com.iptech",
-		"paps"
+        "paps"
+      ]
+    },
+    {
+      "name": "package.openupm.com",
+      "url": "https://package.openupm.com",
+      "scopes": [
+        "com.openupm",
+        "paps.maybe"
       ]
     }
   ],
-
   "dependencies": {
     "com.unity.collab-proxy": "1.2.16",
     "com.unity.ext.nunit": "1.0.0",
@@ -51,7 +58,7 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0",
-	"com.iptech.nsubstitute": "1.0.1",
-	"paps.maybe": "0.0.4"
+    "com.iptech.nsubstitute": "1.0.1",
+    "paps.maybe": "1.0.0"
   }
 }

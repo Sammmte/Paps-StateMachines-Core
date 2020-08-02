@@ -1,5 +1,4 @@
-﻿using Castle.Core.Internal;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Paps.StateMachines.Extensions
@@ -411,7 +410,7 @@ namespace Paps.StateMachines.Extensions
 
         public static void AddEmptyStates<TState, TTrigger>(this IStateMachine<TState, TTrigger> fsm, params TState[] states)
         {
-            fsm.AddStates(states.ConvertAll(stateId => (stateId, States.Empty() as IState)));
+            fsm.AddStates(Array.ConvertAll(states, stateId => (stateId, States.Empty() as IState)));
         }
 
         public static void AddComposite<TState, TTrigger>(this IStateMachine<TState, TTrigger> fsm, TState stateId, params IState[] states)

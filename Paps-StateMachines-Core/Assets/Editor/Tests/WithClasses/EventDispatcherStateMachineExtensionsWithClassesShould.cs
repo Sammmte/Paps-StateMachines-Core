@@ -17,7 +17,7 @@ namespace Tests.WithClasses
 
         protected override IEventDispatcherStateMachine<T, U> NewStateMachine<T, U>()
         {
-            return null;
+            return new PlainStateMachineFake<T, U>();
         }
 
         protected override Transition<string, string> NewTransition()
