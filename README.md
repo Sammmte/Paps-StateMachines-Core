@@ -8,4 +8,4 @@ Base classes, interfaces and extension methods for Paps state machine packages. 
 
 ## License
 
-[MIT License](https://github.com/Sammmte/Paps-StateMachines-Core/blob/master/Paps-StateMachines-Core/Assets/StateMachines-Core/LICENSE.md)
+[MIT License](https://github.com/Sammmte/Paps-StateMachines-Core/blob/master/Paps-StateMachines-Core/Assets/StateMachines%20Core/LICENSE.md)
