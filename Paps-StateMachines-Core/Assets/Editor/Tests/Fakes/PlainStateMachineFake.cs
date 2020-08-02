@@ -267,7 +267,7 @@ namespace Tests
             if (IsIn(PlainStateMachineInternalState.Transitioning))
             {
                 if (_stateComparer.Equals(stateId, _protectedNextState))
-                    throw new ProtectedStateException("Cannot remove protected state " + stateId + " because it takes part on the current transition");
+                    throw new InvalidOperationException("Cannot remove protected state " + stateId + " because it takes part on the current transition");
             }
         }
 
@@ -392,19 +392,7 @@ namespace Tests
 
         private void ThrowByInternalState()
         {
-            switch (_internalState)
-            {
-                case PlainStateMachineInternalState.Stopped:
-                    throw new StateMachineNotStartedException();
-                case PlainStateMachineInternalState.Stopping:
-                    throw new StateMachineStoppingException();
-                case PlainStateMachineInternalState.Transitioning:
-                    throw new StateMachineTransitioningException();
-                case PlainStateMachineInternalState.EvaluatingTransitions:
-                    throw new StateMachineEvaluatingTransitionsException();
-                case PlainStateMachineInternalState.Idle:
-                    throw new StateMachineStartedException();
-            }
+            
         }
 
         private void TriggerQueued()
@@ -452,7 +440,7 @@ namespace Tests
                 {
                     if (multipleValidGuardsFlag)
                     {
-                        throw new MultipleValidTransitionsFromSameStateException(CurrentState.ToString(), trigger.ToString());
+                        throw new MultipleValidTransitionsFromSameStateException(CurrentState, trigger, new object[] { stateTo, transition.StateTo });
                     }
 
                     stateTo = transition.StateTo;

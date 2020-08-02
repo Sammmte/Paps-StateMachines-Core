@@ -4,14 +4,11 @@ namespace Paps.StateMachines
 {
     public class StateIdAlreadyAddedException : Exception
     {
-        public StateIdAlreadyAddedException()
+        public object StateId { get; private set; }
+
+        public StateIdAlreadyAddedException(object stateId) : base("State id already added to state machine")
         {
-
-        }
-
-        public StateIdAlreadyAddedException(string stateId) : base("State id " + stateId + " is already added to state machine")
-        {
-
+            StateId = stateId;
         }
     }
 }

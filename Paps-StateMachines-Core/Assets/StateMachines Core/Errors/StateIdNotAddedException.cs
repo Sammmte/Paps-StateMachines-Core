@@ -4,12 +4,9 @@ namespace Paps.StateMachines
 {
     public class StateIdNotAddedException : Exception
     {
-        public StateIdNotAddedException(string stateIdString) : base("No state with id " + stateIdString + " was added to state machine")
-        {
+        public object StateId { get; private set; }
 
-        }
-
-        public StateIdNotAddedException()
+        public StateIdNotAddedException(object stateId) : base("No state id was added to state machine")
         {
 
         }
